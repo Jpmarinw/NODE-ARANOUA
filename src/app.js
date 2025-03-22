@@ -75,27 +75,33 @@ app.post("/cidades", (req, res) => {
 
 //alterar cidade
 app.put("/cidades/:id", (req, res) => {
-    const id = req.params.id;
-    const cidade =
-        cidades.find((elemento) => elemento.id === Number(id)) || null;
-    cidade.nome = req.body.nome;
-    cidade.uf = req.body.uf;
-    res.status(200).send("cidade alterada com sucesso");
-});
+    const sql =
+        "UPDATE CIDADE SET NOME = ?, UF = ? WHERE ID = " + req.params.id;
+    const params = [req.body.nome, req.body.uf];
 
-function deletarCidade(id) {
-    const indice = cidades.findIndex((elemento) => elemento.id === Number(id));
-    if (indice !== -1) {
-        const cidadesRemovidas = cidades.splice(indice, 1);
-        return cidadesRemovidas[0];
-    }
-    return null;
-}
+    db.run(sql, params, (err) => {
+        if (err) {
+            console.error("Erro ao alterar a cidade", err.message);
+            return res.status(500).json({ error: "Erro ao alterar a cidade" });
+        } else {
+            console.log("Cidade alterada com sucesso.");
+            return res.status(200).send(req.body);
+        }
+    });
+});
 
 //deletar cidade
 app.delete("/cidades/:id", (req, res) => {
-    const cidadeDeletada = deletarCidade(req.params.id);
-    res.status(200).send("Cidade Deletada com sucesso");
+    const sql = "DELETE FROM CIDADE WHERE ID = " + req.params.id;
+    db.run(sql, (err) => {
+        if (err) {
+            console.error("Erro ao deletar a cidade", err.message);
+            return res.status(500).json({ error: "Erro ao deletar a cidade" });
+        } else {
+            console.log("Cidade deletada com sucesso.");
+            return res.status(200).send("Cidade deletada com sucesso");
+        }
+    });
 });
 
 export default app;
