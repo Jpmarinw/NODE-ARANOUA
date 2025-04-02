@@ -15,7 +15,7 @@ db.serialize(() => {
         "CREATE TABLE IF NOT EXISTS CIDADE(" +
             " ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             " NOME TEXT NOT NULL," +
-            " UF TEXT NOT NULL)",
+            " ESTADO TEXT NOT NULL)",
         (err) => {
             if (err) {
                 console.error("Erro ao criar a tabela", err.message);

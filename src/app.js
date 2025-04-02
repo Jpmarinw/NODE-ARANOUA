@@ -21,7 +21,7 @@ app.get("/cidades", (req, res) => {
             const jsonSaida = linhas.map((elemento) => ({
                 id: elemento.ID,
                 nome: elemento.NOME,
-                uf: elemento.UF,
+                estado: elemento.ESTADO,
             }));
             console.log("Cidades listadas com sucesso.");
             return res.status(200).json(jsonSaida);
@@ -40,7 +40,7 @@ app.get("/cidades/:id", (req, res) => {
             const jsonSaida = {
                 id: linha.ID,
                 nome: linha.NOME,
-                uf: linha.UF,
+                estado: linha.ESTADO,
             };
             console.log("Cidade listada com sucesso.");
             return res.status(200).json(jsonSaida);
@@ -53,14 +53,20 @@ app.get("/cidades/:id", (req, res) => {
 //criar cidade
 app.post("/cidades", (req, res) => {
     const nome = req.body.nome;
-    const uf = req.body.uf;
+    const estado = req.body.estado;
 
-    if (!nome || !uf) {
-        return res.status(400).json({ error: "Nome e UF são obrigatórios" });
+    if (!nome || !estado) {
+        return res
+            .status(400)
+            .json({ error: "Nome e ESTADO são obrigatórios" });
     }
 
     const sql =
-        "INSERT INTO CIDADE(NOME, UF) VALUES('" + nome + "', '" + uf + "')";
+        "INSERT INTO CIDADE(NOME, ESTADO) VALUES('" +
+        nome +
+        "', '" +
+        estado +
+        "')";
 
     db.run(sql, (err) => {
         if (err) {
@@ -76,8 +82,8 @@ app.post("/cidades", (req, res) => {
 //alterar cidade
 app.put("/cidades/:id", (req, res) => {
     const sql =
-        "UPDATE CIDADE SET NOME = ?, UF = ? WHERE ID = " + req.params.id;
-    const params = [req.body.nome, req.body.uf];
+        "UPDATE CIDADE SET NOME = ?, ESTADO = ? WHERE ID = " + req.params.id;
+    const params = [req.body.nome, req.body.estado];
 
     db.run(sql, params, (err) => {
         if (err) {
