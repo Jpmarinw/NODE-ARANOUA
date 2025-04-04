@@ -30,3 +30,31 @@ export const listarPessoaPorID = async (req, res) => {
         res.status(500).json({ error: 'Erro ao listar pessoa', detalhes: error});
     }
 };
+
+export const atualizarPessoa = async (req, res) => {
+    try {
+        const pessoa = await Pessoa.findByPk(req.params.id);
+        if (pessoa) {
+            await pessoa.update(req.body);
+            res.status(200).json(pessoa);
+        } else {
+            res.status(404).json({ error: 'Pessoa nao encontrada' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao atualizar pessoa', detalhes: error});
+    }
+};
+
+export const deletarPessoa = async (req, res) => {
+    try {
+        const pessoa = await Pessoa.findByPk(req.params.id);
+        if (pessoa) {
+            await pessoa.destroy();
+            res.status(200).json({ message: 'Pessoa deletada com sucesso' });
+        } else {
+            res.status(404).json({ error: 'Pessoa nao encontrada' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao deletar pessoa', detalhes: error});
+    }
+};
