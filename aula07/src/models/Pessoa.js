@@ -24,10 +24,10 @@ Pessoa.init (
         },
     },
     {
-        sequelize,
-        modelName:'Pessoa',
-        tableName: 'pessoas',
-        timestamps: true,
+        sequelize, // Conexão do Sequelize
+        modelName:'Pessoa', // Nome do modelo
+        tableName: 'pessoas', // Nome da tabela no banco de dados
+        timestamps: true, // Adiciona campos CreatedAt e UpdatedAt
     }
 );
 
