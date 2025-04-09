@@ -40,7 +40,7 @@ export const listarPessoaPorID = async (req, res) => {
     }
 };
 
-// Controller para atualizar uma pessoa por ID
+// Controller para atualizar uma pessoa
 export const atualizarPessoa = async (req, res) => {
     try {
         const pessoa = await Pessoa.findByPk(req.params.id);
