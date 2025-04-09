@@ -1,4 +1,5 @@
 import Pessoa from "../models/Pessoa.js";
+import Cidade from "../models/Cidade.js";
 
 // Controller para Listar as Pessoas
 export const listarPessoas = async (req, res) => {
@@ -8,7 +9,8 @@ export const listarPessoas = async (req, res) => {
         });
         res.status(200).json(pessoas);
     } catch (error) {
-        res.status(500).json({ error: "Erro ao listar pessoas" });
+        console.log(error);
+        res.status(500).json({ error: error.message});
     }
 };
 
