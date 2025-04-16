@@ -4,13 +4,13 @@ import Cidade from "../models/Cidade.js";
 // Controller para Listar as Pessoas
 export const listarPessoas = async (req, res) => {
     try {
-        const pessoas = await Pessoa.findAll( {
+        const pessoas = await Pessoa.findAll({
             include: { model: Cidade, as: "cidade" },
         });
         res.status(200).json(pessoas);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: error.message});
+        res.status(500).json({ error: error.message });
     }
 };
 

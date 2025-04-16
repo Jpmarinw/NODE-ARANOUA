@@ -9,33 +9,31 @@ export const listarCidades = async (req, res) => {
                 as: "estado",
             },
         });
-    
-    const response = cidades.map((cidade) => ({
-        ibge: cidade.ibge,
-        nome: cidade.nome,
-        estado: cidade.estado.nome
-    }));
 
-    res.status(200).json(response);
+        const response = cidades.map((cidade) => ({
+            ibge: cidade.ibge,
+            nome: cidade.nome,
+            estado: cidade.estado.nome,
+        }));
+
+        res.status(200).json(response);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Erro ao listar cidades", error });
     }
-}
+};
 
 export const criarCidade = async (req, res) => {
     const { ibge, nome, estado } = req.body;
 
     try {
-
         if (!estado) {
             return res.status(400).json({ message: "Estado não informado" });
         }
 
         const estadoEncontrado = await Estado.findOne({
             where: { nome: estado },
-        }
-        );
+        });
 
         const novaCidade = await Cidade.create({
             ibge,
@@ -48,9 +46,9 @@ export const criarCidade = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: "Erro ao criar cidade", error });
     }
-}
+};
 
-export  const obterCidade = async (req, res) => {
+export const obterCidade = async (req, res) => {
     try {
         const cidade = await Cidade.findByPk(req.params.id, {
             include: {
@@ -74,7 +72,7 @@ export  const obterCidade = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: "Erro ao obter cidade", error });
     }
-}
+};
 
 export const alterarCidade = async (req, res) => {
     const { ibge, nome, estado } = req.body;
@@ -85,7 +83,7 @@ export const alterarCidade = async (req, res) => {
         }
 
         const estadoEncontrado = await Estado.findOne({
-            where: { nome: estado }, 
+            where: { nome: estado },
         });
 
         if (!estadoEncontrado) {
@@ -106,14 +104,12 @@ export const alterarCidade = async (req, res) => {
         res.status(200).json({
             message: "Cidade atualizada com sucesso",
             cidadeAtualizada,
-
         });
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Erro ao atualizar cidade", error });
     }
-}
+};
 
 export const deletarCidade = async (req, res) => {
     try {
@@ -132,4 +128,4 @@ export const deletarCidade = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: "Erro ao deletar cidade", error });
     }
-}
+};

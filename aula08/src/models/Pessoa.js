@@ -3,7 +3,7 @@ import Cidade from "./Cidade.js";
 
 class Pessoa extends Model {
     static initModel(sequelize) {
-        Pessoa.init (
+        Pessoa.init(
             {
                 nome: {
                     type: DataTypes.STRING,
@@ -24,15 +24,15 @@ class Pessoa extends Model {
             },
             {
                 sequelize, // Conexão do Sequelize
-                modelName:'Pessoa', // Nome do modelo
-                tableName: 'pessoas', // Nome da tabela no banco de dados
+                modelName: "Pessoa", // Nome do modelo
+                tableName: "pessoas", // Nome da tabela no banco de dados
                 timestamps: true, // Adiciona campos CreatedAt e UpdatedAt
             }
         );
 
         Pessoa.belongsTo(Cidade, {
-            foreignKey: 'cidade_id',
-            as: 'cidade',
+            foreignKey: "cidade_id",
+            as: "cidade",
         });
     }
 }

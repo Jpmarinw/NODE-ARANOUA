@@ -24,7 +24,7 @@ class Estado extends Model {
                 tableName: "estados", // Nome da tabela no banco de dados
                 timestamps: true,
             }
-         );
+        );
     }
 }
 
