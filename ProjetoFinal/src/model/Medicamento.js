@@ -38,6 +38,11 @@ class Medicamento extends Fabricante {
                 timestamps: true, // Adiciona campos CreatedAt e UpdatedAt
             }
         );
+
+        Medicamento.belongsTo(Fabricante, {
+            foreignKey: "fabricante_id",
+            as: "fabricante", // Nome do alias para a associação
+        });
     }
 }
 
