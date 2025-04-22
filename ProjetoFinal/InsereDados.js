@@ -1,6 +1,6 @@
-import sequelize from "./config/database.js";
-import Medicamento from "./models/medicamento.js";
-import Fabricante from "./models/fabricante.js";
+import sequelize from "./src/config/database.js";
+import Medicamento from "./src/model/Medicamento.js";
+import Fabricante from "./src/model/Fabricante.js";
 
 (async () => {
     try {
@@ -9,28 +9,30 @@ import Fabricante from "./models/fabricante.js";
 
         await Fabricante.create({
             nome: "Fabricante A",
-            endereco: "Rua A, 123",
-            telefone: "123456789",
+            documento_registro: "000001",
+            pais: "Brasil",
         });
 
         await Fabricante.create({
             nome: "Fabricante B",
-            endereco: "Rua B, 456",
-            telefone: "987654321",
+            documento_registro: "000002",
+            pais: "Colombia",
         });
 
         await Medicamento.create({
-            nome: "Medicamento A",
-            descricao: "Descrição do Medicamento A",
-            preco: 10.99,
-            fabricanteId: 1,
+            nome_comercial: "Dipirona Monohidratada",
+            principio_ativo: "Dipirona",
+            registro_anvisa: "123456789",
+            dosagem: "500mg",
+            fabricante_id: 1,
         });
 
         await Medicamento.create({
-            nome: "Medicamento B",
-            descricao: "Descrição do Medicamento B",
-            preco: 19.99,
-            fabricanteId: 2,
+            nome_comercial: "Nimesulida",
+            principio_ativo: "Nimesulida",
+            registro_anvisa: "987654321",
+            dosagem: "100mg",
+            fabricante_id: 2,
         });
 
         console.log("Dados inseridos com sucesso.");

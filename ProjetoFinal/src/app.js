@@ -1,7 +1,7 @@
 import sequelize from "./config/database.js";
 import express from "express";
-import FabricanteRouter from "./routes/fabricante.js";
-import MedicamentoRouter from "./routes/medicamento.js";
+import FabricanteRouter from "./router/FabricanteRouter.js";
+import MedicamentoRouter from "./router/MedicamentoRouter.js";
 
 const app = express();
 

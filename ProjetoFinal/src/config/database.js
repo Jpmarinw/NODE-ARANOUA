@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
-import Fabricante from "../models/fabricante.js";
-import Medicamento from "../models/medicamento.js";
+import Fabricante from "../model/Fabricante.js";
+import Medicamento from "../model/Medicamento.js";
 
 const sequelize = new Sequelize({
     dialect: "sqlite",
@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
     logging: false,
 });
 
-Fabricante.init(sequelize);
-Medicamento.init(sequelize);
+Fabricante.initModel(sequelize);
+Medicamento.initModel(sequelize);
 
 export default sequelize;

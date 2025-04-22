@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import Fabricante from "./Fabricante.js";
+import Fabricante from "./Fabricante.js"; // Importando o modelo Fabricante
 
 class Medicamento extends Fabricante {
     static initModel(sequelize) {
