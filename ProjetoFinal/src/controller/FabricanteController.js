@@ -1,6 +1,7 @@
 import Fabricante from "../model/Fabricante.js";
 import Medicamento from "../model/Medicamento.js";
 
+//Lista todos os fabricantes cadastrados
 export const listarFabricantes = async (req, res) => {
     try {
         const fabricantes = await Fabricante.findAll();
@@ -10,6 +11,7 @@ export const listarFabricantes = async (req, res) => {
     }
 };
 
+//Cadastra um novo fabricante
 export const criarFabricante = async (req, res) => {
     try {
         const { nome, documento_registro, pais } = req.body;
@@ -24,29 +26,24 @@ export const criarFabricante = async (req, res) => {
     }
 };
 
+//Retorna informações detalhadas de um fabricante específico
 export const obterFabricante = async (req, res) => {
     try {
-        const fabricante = await Fabricante.findByPk(req.params.id);
+        const fabricante = await Fabricante.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Medicamento,
+                    as: "medicamentos",
+                    attributes: ["id", "nome_comercial", "principio_ativo"],
+                },
+            ],
+        });
         if (!fabricante) {
             return res.status(404).json({ error: "Fabricante não encontrado" });
         }
         res.status(200).json(fabricante);
     } catch (error) {
         res.status(500).json({ error: "Erro ao obter fabricante" });
-    }
-};
-
-export const alterarFabricante = async (req, res) => {
-    try {
-        const fabricante = await Fabricante.findByPk(req.params.id);
-        if (!fabricante) {
-            return res.status(404).json({ error: "Fabricante não encontrado" });
-        }
-        const { nome, documento_registro, pais } = req.body;
-        await fabricante.update({ nome, documento_registro, pais });
-        res.status(200).json(fabricante);
-    } catch (error) {
-        res.status(500).json({ error: "Erro ao alterar fabricante" });
     }
 };
 

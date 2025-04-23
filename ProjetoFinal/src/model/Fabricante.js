@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-
 class Fabricante extends Model {
+
     static initModel(sequelize) {
         Fabricante.init(
             {
@@ -27,6 +27,15 @@ class Fabricante extends Model {
             }
         );
     }
+
+    static associate(models) {
+        // Definindo a associação com o modelo Medicamento
+        this.hasMany(models.Medicamento, {
+            foreignKey: "fabricante_id",
+            as: "medicamentos",
+        });
+    }
+    
 }
 
 export default Fabricante;
