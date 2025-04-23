@@ -107,7 +107,7 @@ export const deletarMedicamento = async (req, res) => {
                 .json({ error: "Medicamento não encontrado" });
         }
         await medicamento.destroy();
-        res.status(204).json("Medicamento deletado");
+        res.status(204).json({ message: "Medicamento deletado" });
     } catch (error) {
         res.status(500).json({ error: "Erro ao deletar medicamento", error });
     }

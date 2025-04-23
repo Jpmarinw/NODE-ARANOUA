@@ -3,17 +3,15 @@ import express from "express";
 import {
     listarMedicamentos,
     criarMedicamento,
-    /*obterMedicamento,
-    alterarMedicamento,
-    deletarMedicamento*/
+    obterMedicamento,
+    deletarMedicamento,
 } from "../controller/MedicamentoController.js";
 
 const router = express.Router();
 
 router.get("/", listarMedicamentos);
 router.post("/", criarMedicamento);
-/*router.get("/:id", obterMedicamento);
-router.put("/:id", alterarMedicamento);
+router.get("/:id", obterMedicamento);
 router.delete("/:id", deletarMedicamento);
-*/
+
 export default router;
